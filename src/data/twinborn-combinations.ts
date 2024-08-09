@@ -18,7 +18,7 @@ enum Metal {
   Bendalloy = 'Bendalloy',
   Malatium = 'Malatium',
   Atium = 'Atium',
-};
+}
 
 type FeruchemicalPower = {
   tappingEffect: string;
@@ -27,13 +27,6 @@ type FeruchemicalPower = {
 
 type AllomanticPower = {
   burningEffect: string;
-};
-
-type TwinbornCombos = `${Metal}-${Metal}`;
-
-type Twinborn = {
-  allomancy: AllomanticPower;
-  feruchemy: AllomanticPower;
 };
 
 const allomanticPowers: { [key in Metal]: AllomanticPower } = {
@@ -78,10 +71,11 @@ const feruchemicalPowers: { [key in Metal]: FeruchemicalPower } = {
   Atium: { tappingEffect: 'Allows user to become younger', storingEffect: 'Makes user older.' },
 };
 
-const twinbornCombos = Object.keys(allomanticPowers).flatMap((allomanticMetal) => {
+export const twinbornCombos = Object.keys(allomanticPowers).flatMap((allomanticMetal) => {
   const allomanticPower = allomanticPowers[allomanticMetal as Metal];
   return Object.keys(feruchemicalPowers).map((feruchemicalMetal) => {
     const feruchemicalPower = feruchemicalPowers[feruchemicalMetal as Metal];
+
     return {
       twinbornType: `${allomanticMetal}-${feruchemicalMetal}`,
       allomanticPower: { ...allomanticPower, metal: allomanticMetal },
@@ -89,6 +83,3 @@ const twinbornCombos = Object.keys(allomanticPowers).flatMap((allomanticMetal) =
     };
   });
 });
-
-console.log(twinbornCombos);
-console.log(`Total: ${twinbornCombos.length}`);
