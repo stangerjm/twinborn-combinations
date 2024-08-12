@@ -29,6 +29,12 @@ type AllomanticPower = {
   burningEffect: string;
 };
 
+export type Twinborn = {
+  twinbornType: string;
+  allomanticPower: AllomanticPower & { metal: Metal };
+  feruchemicalPower: FeruchemicalPower & { metal: Metal };
+};
+
 const allomanticPowers: { [key in Metal]: AllomanticPower } = {
   Steel: { burningEffect: 'Allows user to push on metal.' },
   Iron: { burningEffect: 'Allows user to pull on metal.' },
@@ -71,10 +77,12 @@ const feruchemicalPowers: { [key in Metal]: FeruchemicalPower } = {
   Atium: { tappingEffect: 'Allows user to become younger', storingEffect: 'Makes user older.' },
 };
 
-export const twinbornCombos = Object.keys(allomanticPowers).flatMap((allomanticMetal) => {
-  const allomanticPower = allomanticPowers[allomanticMetal as Metal];
-  return Object.keys(feruchemicalPowers).map((feruchemicalMetal) => {
-    const feruchemicalPower = feruchemicalPowers[feruchemicalMetal as Metal];
+export const twinbornCombos: Twinborn[] = Object.keys(allomanticPowers).flatMap((aMetal) => {
+  const allomanticMetal = aMetal as Metal;
+  const allomanticPower = allomanticPowers[allomanticMetal];
+  return Object.keys(feruchemicalPowers).map((fMetal) => {
+    const feruchemicalMetal = fMetal as Metal;
+    const feruchemicalPower = feruchemicalPowers[feruchemicalMetal];
 
     return {
       twinbornType: `${allomanticMetal}-${feruchemicalMetal}`,
