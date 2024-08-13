@@ -9,7 +9,7 @@ const { twinbornCombos } = defineProps<{ twinbornCombos: Twinborn[] }>();
   <div class="twinborn-list">
     <TwinbornCombo
       v-for="combo in twinbornCombos"
-      :key="combo.twinbornType"
+      :key="`${combo.allomanticPower.metal}-${combo.feruchemicalPower.metal}`"
       :twinborn="combo"
     />
   </div>
@@ -18,10 +18,12 @@ const { twinbornCombos } = defineProps<{ twinbornCombos: Twinborn[] }>();
 <style scoped>
 .twinborn-list {
   display: grid;
+  justify-content: center;
   padding: 1rem;
   grid-gap: 1rem;
   height: 100%;
-  width: 100%;
+  width: 35%;
+  margin: 0 auto;
   overflow-y: scroll;
 }
 </style>

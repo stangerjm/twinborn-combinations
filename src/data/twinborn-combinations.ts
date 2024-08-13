@@ -108,7 +108,7 @@ const allomanticPowers: { [key in Metal]: AllomanticPower } = {
   },
   Atium: {
     names: ['Seer'],
-    burningEffect: "Allows user to see another person's future",
+    burningEffect: "Allows user to see another person's future.",
   },
 };
 
@@ -126,7 +126,7 @@ const feruchemicalPowers: { [key in Metal]: FeruchemicalPower } = {
   Pewter: {
     names: ['Brute'],
     tappingEffect: "Enhances user's physical strength.",
-    storingEffect: "Diminishes user's physical strength",
+    storingEffect: "Diminishes user's physical strength.",
   },
   Tin: {
     names: ['Windwhisperer'],
@@ -200,7 +200,7 @@ const feruchemicalPowers: { [key in Metal]: FeruchemicalPower } = {
   },
   Atium: {
     names: [],
-    tappingEffect: 'Allows user to become younger',
+    tappingEffect: 'Allows user to become younger.',
     storingEffect: 'Makes user older.',
   },
 };
