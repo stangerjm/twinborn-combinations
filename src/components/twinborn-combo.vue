@@ -12,9 +12,12 @@ const { twinborn } = defineProps<TwinbornComboProps>();
 
 <template>
   <div class="twinborn-combination">
-    <b>{{ twinborn.twinbornType }}</b>
-    <AllomancySymbol :metal="twinborn.allomanticPower.metal" />
-    <FeruchemySymbol :metal="twinborn.feruchemicalPower.metal" />
+    <header class="twinborn-combination--title">
+      <span>{{ twinborn.allomanticPower.metal }} <template v-if="twinborn.allomanticPower.names.length > 0">({{ twinborn.allomanticPower.names.join('/') }})</template></span>
+      <AllomancySymbol :metal="twinborn.allomanticPower.metal" />
+      <span>{{ twinborn.feruchemicalPower.metal }} <template v-if="twinborn.feruchemicalPower.names.length > 0">({{ twinborn.feruchemicalPower.names.join('/') }})</template></span>
+      <FeruchemySymbol :metal="twinborn.feruchemicalPower.metal" />
+    </header>
     <div class="twinborn-combination--hidden">
       <div>
         Allomancy: {{ twinborn.allomanticPower.metal }}<br>
@@ -36,6 +39,14 @@ const { twinborn } = defineProps<TwinbornComboProps>();
   background: #072d52;
   border-radius: 0.75rem;
   padding: 1rem;
+}
+
+.twinborn-combination--title {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  grid-gap: 1rem;
+  align-items: center;
 }
 
 .twinborn-combination--symbol {
