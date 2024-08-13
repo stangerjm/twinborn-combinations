@@ -1,5 +1,6 @@
 const UnknownEffect = 'Unknown';
-enum Metal {
+
+export enum Metal {
   Steel = 'Steel',
   Iron = 'Iron',
   Pewter = 'Pewter',

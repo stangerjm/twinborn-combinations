@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Twinborn } from '../data/twinborn-combinations';
-import iron from '../assets/feruchemy/iron.svg';
+import FeruchemySymbol from '../components/feruchemy-symbol.vue';
+import AllomancySymbol from '../components/allomancy-symbol.vue';
 
 interface TwinbornComboProps {
   twinborn: Twinborn;
@@ -12,10 +13,8 @@ const { twinborn } = defineProps<TwinbornComboProps>();
 <template>
   <div class="twinborn-combination">
     <b>{{ twinborn.twinbornType }}</b>
-    <img
-      class="twinborn-combination--symbol"
-      :src="iron"
-    >
+    <AllomancySymbol :metal="twinborn.allomanticPower.metal" />
+    <FeruchemySymbol :metal="twinborn.feruchemicalPower.metal" />
     <div class="twinborn-combination--hidden">
       <div>
         Allomancy: {{ twinborn.allomanticPower.metal }}<br>
