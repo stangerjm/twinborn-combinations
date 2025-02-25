@@ -26,12 +26,10 @@ function isSelected(combo: Twinborn) {
 <style scoped>
 .twinborn-list {
   display: grid;
+  align-items: start;
   justify-content: center;
-  padding: 1rem;
   grid-gap: 1rem;
   height: 100%;
   width: 100%;
-  overflow-y: scroll;
-  scrollbar-width: none;
 }
 </style>

@@ -40,8 +40,7 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
 
 <style scoped>
 .twinborn-combination {
-  width: 35%;
-  margin: 0 auto;
+  width: 100%;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr auto 1fr;

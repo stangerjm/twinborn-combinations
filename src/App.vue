@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { twinbornCombos } from './data/twinborn-combinations';
-import TwinbornList from './components/twinborn-list.vue';
+import ConfigurableList from './views/configurable-list.vue';
 </script>
 
 <template>
   <div class="twinborn">
-    <TwinbornList :twinborn-combos="twinbornCombos" />
+    <ConfigurableList />
   </div>
 </template>
 
@@ -13,5 +12,7 @@ import TwinbornList from './components/twinborn-list.vue';
 .twinborn {
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 </style>
