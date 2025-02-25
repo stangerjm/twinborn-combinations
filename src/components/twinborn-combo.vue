@@ -5,9 +5,10 @@ import AllomancySymbol from '../components/allomancy-symbol.vue';
 
 interface TwinbornComboProps {
   twinborn: Twinborn;
+  selected?: boolean;
 }
 
-const { twinborn } = defineProps<TwinbornComboProps>();
+const { twinborn, selected } = defineProps<TwinbornComboProps>();
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const { twinborn } = defineProps<TwinbornComboProps>();
         <span>{{ twinborn.allomanticPower.metal }} <template v-if="twinborn.allomanticPower.names.length > 0">({{ twinborn.allomanticPower.names.join('/') }})</template></span>
         <AllomancySymbol :metal="twinborn.allomanticPower.metal" />
       </header>
-      <main class="twinborn-combination--hidden">
+      <main :class="selected ? 'twinborn-combination--show' : 'twinborn-combination--hidden'">
         <div class="twinborn-combination--spacer" />
         {{ twinborn.allomanticPower.burningEffect }}
       </main>
@@ -28,7 +29,7 @@ const { twinborn } = defineProps<TwinbornComboProps>();
         <span>{{ twinborn.feruchemicalPower.metal }} <template v-if="twinborn.feruchemicalPower.names.length > 0">({{ twinborn.feruchemicalPower.names.join('/') }})</template></span>
         <FeruchemySymbol :metal="twinborn.feruchemicalPower.metal" />
       </header>
-      <main class="twinborn-combination--hidden">
+      <main :class="selected ? 'twinborn-combination--show' : 'twinborn-combination--hidden'">
         <div class="twinborn-combination--spacer" />
         When tapping - {{ twinborn.feruchemicalPower.tappingEffect }}<br>
         When storing - {{ twinborn.feruchemicalPower.storingEffect }}
@@ -39,7 +40,8 @@ const { twinborn } = defineProps<TwinbornComboProps>();
 
 <style scoped>
 .twinborn-combination {
-  width: 100%;
+  width: 35%;
+  margin: 0 auto;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr auto 1fr;
@@ -51,6 +53,10 @@ const { twinborn } = defineProps<TwinbornComboProps>();
   color: white;
   background: #072d52;
   padding: 1rem;
+}
+
+.twinborn-combination:hover {
+  cursor: pointer;
 }
 
 .twinborn-combination--section {
@@ -79,6 +85,7 @@ const { twinborn } = defineProps<TwinbornComboProps>();
   display: inline-block;
 }
 
+.twinborn-combination--show .twinborn-combination--spacer,
 .twinborn-combination--hidden .twinborn-combination--spacer {
   height: 0.1rem;
   width: 100%;
@@ -88,15 +95,22 @@ const { twinborn } = defineProps<TwinbornComboProps>();
   color: white;
 }
 
-.twinborn-combination:hover .twinborn-combination--hidden {
-  max-height: 20rem;
-  transition: max-height 650ms ease;
-}
-
+.twinborn-combination--show,
 .twinborn-combination--hidden {
   display: grid;
   grid-gap: 1rem;
   margin-top: 1rem;
+}
+
+.twinborn-combination--show {
+  max-height: 20rem;
+  transition: max-height 650ms ease;
+  display: grid;
+  grid-gap: 1rem;
+  margin-top: 1rem;
+}
+
+.twinborn-combination--hidden {
   overflow: hidden;
   max-height: 0;
   transition: max-height 250ms ease;
