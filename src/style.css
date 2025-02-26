@@ -6,10 +6,12 @@ html {
   font-size: 10px;
   height: 100vh;
   width: 100vw;
+  color: white;
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  font-family: Verdana;
   height: 100%;
   width: 100%;
   margin: 0;

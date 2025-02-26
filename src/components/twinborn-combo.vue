@@ -13,6 +13,10 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
 
 <template>
   <div class="twinborn-combination">
+    <span
+      class="twinborn-combination--selectIcon"
+      :class="selected ? 'twinborn-combination--selectIcon__selected' : 'twinborn-combination--selectIcon__closed'"
+    />
     <div class="twinborn-combination--section">
       <header class="twinborn-combination--title">
         <span>{{ twinborn.allomanticPower.metal }} <template v-if="twinborn.allomanticPower.names.length > 0">({{ twinborn.allomanticPower.names.join('/') }})</template></span>
@@ -25,7 +29,7 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
     </div>
     <div class="twinborn-combination--spacer" />
     <div class="twinborn-combination--section">
-      <header class="twinborn-combination--title">
+      <header class="twinborn-combination--title twinborn-combination--feruchemicalMetal">
         <span>{{ twinborn.feruchemicalPower.metal }} <template v-if="twinborn.feruchemicalPower.names.length > 0">({{ twinborn.feruchemicalPower.names.join('/') }})</template></span>
         <FeruchemySymbol :metal="twinborn.feruchemicalPower.metal" />
       </header>
@@ -43,15 +47,16 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
   width: 100%;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto 1fr;
   justify-content: space-between;
   grid-gap: 1rem;
   align-items: center;
-  border: 0.2rem solid #a1b1c2;
+  border: 0.2rem solid var(--item-border-color);
   border-radius: 0.75rem;
   color: white;
-  background: #072d52;
+  background: var(--item-background-color);
   padding: 1rem;
+  overflow: hidden;
 }
 
 .twinborn-combination:hover {
@@ -98,12 +103,11 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
 .twinborn-combination--hidden {
   display: grid;
   grid-gap: 1rem;
-  margin-top: 1rem;
 }
 
 .twinborn-combination--show {
   max-height: 20rem;
-  transition: max-height 650ms ease;
+  transition: max-height 650ms ease, margin-top 350ms ease;
   display: grid;
   grid-gap: 1rem;
   margin-top: 1rem;
@@ -112,6 +116,31 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
 .twinborn-combination--hidden {
   overflow: hidden;
   max-height: 0;
-  transition: max-height 250ms ease;
+  transition: max-height 250ms ease, margin-top 250ms ease;
+}
+
+.twinborn-combination--selectIcon {
+  margin-top: 0.4rem;
+  align-self: start;
+}
+
+.twinborn-combination--selectIcon__selected {
+  min-width: 2rem;
+  height: 2rem;
+  background-image: url('../assets/arrow-up.svg');
+  background-size: 2rem;
+  background-repeat: no-repeat;
+}
+
+.twinborn-combination--selectIcon__closed {
+  min-width: 2rem;
+  height: 2rem;
+  background-image: url('../assets/arrow-down.svg');
+  background-size: 2rem;
+  background-repeat: no-repeat;
+}
+
+.twinborn-combination--feruchemicalMetal {
+  text-align: right;
 }
 </style>

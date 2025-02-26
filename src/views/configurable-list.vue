@@ -1,46 +1,52 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import TwinbornList from '../components/twinborn-list.vue';
-import { Metal, Twinborn, twinbornCombos } from '../data/twinborn-combinations';
+import MetalFilter from '../components/metal-filter.vue';
+import { Twinborn, twinbornCombos } from '../data/twinborn-combinations';
+import { Filter } from '../interfaces/filters';
 
-const filter = ref<Metal | undefined>(undefined);
 const combos = ref<Twinborn[]>(twinbornCombos);
+const filters = ref<Filter>({});
 
-function filterCombos() {
-  combos.value = filter.value ?
-    twinbornCombos.filter(({ allomanticPower, feruchemicalPower }) => allomanticPower.metal === filter.value || feruchemicalPower.metal === filter.value) :
-    twinbornCombos;
+function getFilteredCombos() {
+  return combos.value.filter(({ allomanticPower, feruchemicalPower }) => {
+    if (filters.value.Compounders) {
+      return allomanticPower.metal === feruchemicalPower.metal;
+    }
+
+    if (filters.value.AllomanticMetal && filters.value.FeruchemicalMetal) {
+      return allomanticPower.metal === filters.value.AllomanticMetal
+        && feruchemicalPower.metal === filters.value.FeruchemicalMetal;
+    }
+
+    if (filters.value.AllomanticMetal) {
+      return allomanticPower.metal === filters.value.AllomanticMetal;
+    }
+
+    if (filters.value.FeruchemicalMetal) {
+      return feruchemicalPower.metal === filters.value.FeruchemicalMetal;
+    }
+
+    return true;
+  });
 }
 </script>
 
 <template>
   <div class="twinborn-configurableList">
-    <select
-      v-model="filter"
-      @change="filterCombos"
-    >
-      <option
-        v-for="metal in Object.keys(Metal)"
-        :key="metal"
-      >
-        {{ metal }}
-      </option>
-    </select>
-    <TwinbornList :twinborn-combos="combos" />
+    <MetalFilter v-model="filters" />
+    <TwinbornList :twinborn-combos="getFilteredCombos()" />
   </div>
 </template>
 
 <style scoped>
 .twinborn-configurableList {
   display: grid;
+  grid-template-rows: auto 1fr;
   grid-gap: 1rem;
   padding: 1rem;
   width: 35%;
   height: 100%;
   margin: 0 auto;
-}
-
-.test {
-  color: white;
 }
 </style>
