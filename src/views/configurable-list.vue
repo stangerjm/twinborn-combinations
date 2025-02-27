@@ -44,8 +44,8 @@ function getFilteredCombos() {
   display: grid;
   grid-template-rows: auto 1fr;
   grid-gap: 1rem;
-  padding: 1rem;
-  width: 35%;
+  padding-top: 1rem;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
 }

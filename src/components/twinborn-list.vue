@@ -31,5 +31,12 @@ function isSelected(combo: Twinborn) {
   grid-gap: 1rem;
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
+  grid-auto-rows: max-content;
+  padding-bottom: 1rem;
+  /* using padding here instead of margin so the element can take up the entire screen
+     and can be scrolled without having to put the cursor in the list itself. */
+  padding-left: 32.5%;
+  padding-right: 32.5%;
 }
 </style>

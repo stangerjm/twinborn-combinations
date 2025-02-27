@@ -84,7 +84,13 @@ const isOpen = ref<boolean>(false);
 
 <style scoped>
 .twinborn-metalFilter {
-  width: 100%;
+  /* usually I would prefer to put the width of the parent to the 35% here but in this case
+     I want the list to be scrollable while the search bar is static. `position: fixed` isn't
+     helpful here since there isn't a good way to target the width of the parent element who's
+     width will take up the entire screen instead of the 35%. */
+  width: 35%;
+  margin: 0 auto;
+  position: relative;
 }
 
 input {
@@ -112,6 +118,9 @@ input {
 
 .twinborn-metalFilter--dropdown__show {
   display: inline-block;
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 
 .twinborn-metalFilter--filters {
