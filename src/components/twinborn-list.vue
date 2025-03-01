@@ -9,16 +9,24 @@ const selectedCombo = ref<Twinborn | undefined>(undefined);
 function isSelected(combo: Twinborn) {
   return combo.allomanticPower.metal === selectedCombo.value?.allomanticPower.metal && combo.feruchemicalPower.metal === selectedCombo.value?.feruchemicalPower.metal;
 }
+
+function toggleCombo(combo: Twinborn) {
+  selectedCombo.value = isSelected(combo) ? undefined : combo;
+}
 </script>
 
 <template>
-  <div class="twinborn-list">
+  <div
+    class="twinborn-list"
+    tabindex="-1"
+  >
     <TwinbornCombo
       v-for="combo in twinbornCombos"
       :key="`${combo.allomanticPower.metal}-${combo.feruchemicalPower.metal}`"
       :twinborn="combo"
       :selected="isSelected(combo)"
-      @click="selectedCombo = isSelected(combo) ? undefined : combo"
+      @click="() => toggleCombo(combo)"
+      @keydown.enter="() => toggleCombo(combo)"
     />
   </div>
 </template>

@@ -4,6 +4,7 @@ import TwinbornList from '../components/twinborn-list.vue';
 import MetalFilter from '../components/metal-filter.vue';
 import { Twinborn, twinbornCombos } from '../data/twinborn-combinations';
 import { Filter } from '../interfaces/filters';
+import { includes } from '../utils/compare';
 
 const combos = ref<Twinborn[]>(twinbornCombos);
 const filters = ref<Filter>({});
@@ -25,6 +26,14 @@ function getFilteredCombos() {
 
     if (filters.value.FeruchemicalMetal) {
       return feruchemicalPower.metal === filters.value.FeruchemicalMetal;
+    }
+
+    if (filters.value.Search) {
+      const search = filters.value.Search.includes('=') ? filters.value.Search.split('=')[1] : filters.value.Search;
+      return includes(feruchemicalPower.metal, search)
+        || feruchemicalPower.names.some((name) => includes(name, search))
+        || includes(allomanticPower.metal, search)
+        || allomanticPower.names.some((name) => includes(name, search));
     }
 
     return true;

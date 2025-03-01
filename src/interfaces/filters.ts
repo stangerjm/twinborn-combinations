@@ -4,6 +4,7 @@ export type Filter = {
   AllomanticMetal?: Metal;
   FeruchemicalMetal?: Metal;
   Compounders?: boolean;
+  Search?: string;
 };
 
-export type FilterType = keyof Filter;
+export type FilterType = keyof Omit<Filter, 'Search'>;

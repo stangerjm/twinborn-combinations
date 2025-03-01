@@ -12,7 +12,10 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
 </script>
 
 <template>
-  <div class="twinborn-combination">
+  <div
+    class="twinborn-combination"
+    tabindex="0"
+  >
     <span
       class="twinborn-combination--selectIcon"
       :class="selected ? 'twinborn-combination--selectIcon__selected' : 'twinborn-combination--selectIcon__closed'"
@@ -57,6 +60,7 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
   background: var(--item-background-color);
   padding: 1rem;
   overflow: hidden;
+  margin-top: 0.1rem;
 }
 
 .twinborn-combination:hover {
