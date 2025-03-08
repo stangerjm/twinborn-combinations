@@ -36,13 +36,9 @@ function toggleCombo(combo: Twinborn) {
   display: grid;
   grid-gap: 1rem;
   height: 100%;
-  width: 100%;
-  overflow-y: scroll;
+  width: 35%;
   grid-auto-rows: max-content;
   padding-bottom: 1rem;
-  /* using padding here instead of margin so the element can take up the entire screen
-     and can be scrolled without having to put the cursor in the list itself. */
-  padding-left: 32.5%;
-  padding-right: 32.5%;
+  margin: 0 auto;
 }
 </style>

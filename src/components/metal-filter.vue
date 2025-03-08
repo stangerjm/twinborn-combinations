@@ -122,6 +122,7 @@ function shouldShowFilterDropdown() {
         ref="filter-input"
         v-model="searchText"
         type="search"
+        aria-label="Metal filter"
         @input="(e) => {
           isOpen = true;
           selectedFilters.Search = (e.target as HTMLInputElement).value;

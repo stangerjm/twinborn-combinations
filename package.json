@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "vite",
+    "test": "vitest",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview"
   },
@@ -14,13 +15,17 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@testing-library/user-event": "^14.6.1",
+    "@testing-library/vue": "^8.1.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@vitejs/plugin-vue": "^5.1.2",
     "eslint": "^8.57.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-vue": "^9.27.0",
+    "jsdom": "^26.0.0",
     "typescript": "^5.5.3",
     "vite": "^5.4.0",
+    "vitest": "^3.0.8",
     "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.0.29"
   }
