@@ -15,6 +15,9 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
   <div
     class="twinborn-combination"
     tabindex="0"
+    role="button"
+    aria-label="Twinborn"
+    :aria-expanded="selected"
   >
     <span
       class="twinborn-combination--selectIcon"
@@ -22,7 +25,7 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
     />
     <div class="twinborn-combination--section">
       <header class="twinborn-combination--title">
-        <span>{{ twinborn.allomanticPower.metal }} <template v-if="twinborn.allomanticPower.names.length > 0">({{ twinborn.allomanticPower.names.join('/') }})</template></span>
+        <span class="twinborn-combination--allomanticMetal">{{ twinborn.allomanticPower.metal }} <template v-if="twinborn.allomanticPower.names.length > 0">({{ twinborn.allomanticPower.names.join('/') }})</template></span>
         <AllomancySymbol :metal="twinborn.allomanticPower.metal" />
       </header>
       <main :class="selected ? 'twinborn-combination--show' : 'twinborn-combination--hidden'">
@@ -32,8 +35,8 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
     </div>
     <div class="twinborn-combination--spacer" />
     <div class="twinborn-combination--section">
-      <header class="twinborn-combination--title twinborn-combination--feruchemicalMetal">
-        <span>{{ twinborn.feruchemicalPower.metal }} <template v-if="twinborn.feruchemicalPower.names.length > 0">({{ twinborn.feruchemicalPower.names.join('/') }})</template></span>
+      <header class="twinborn-combination--title twinborn-combination--feruchemyTitle">
+        <span class="twinborn-combination--feruchemicalMetal">{{ twinborn.feruchemicalPower.metal }} <template v-if="twinborn.feruchemicalPower.names.length > 0">({{ twinborn.feruchemicalPower.names.join('/') }})</template></span>
         <FeruchemySymbol :metal="twinborn.feruchemicalPower.metal" />
       </header>
       <main :class="selected ? 'twinborn-combination--show' : 'twinborn-combination--hidden'">
@@ -121,6 +124,18 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
   overflow: hidden;
   max-height: 0;
   transition: max-height 250ms ease, margin-top 250ms ease;
+  /* hide the content from a screen reader. Ensure the animation is till smooth */
+  visibility: hidden;
+  animation: fadeOut 250ms;
+}
+
+@keyframes fadeOut {
+  0% {
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+  }
 }
 
 .twinborn-combination--selectIcon {
@@ -144,7 +159,7 @@ const { twinborn, selected } = defineProps<TwinbornComboProps>();
   background-repeat: no-repeat;
 }
 
-.twinborn-combination--feruchemicalMetal {
+.twinborn-combination--feruchemyTitle {
   text-align: right;
 }
 </style>

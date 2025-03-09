@@ -29,7 +29,13 @@ function getFilteredCombos() {
     }
 
     if (filters.value.Search) {
-      const search = filters.value.Search.includes('=') ? filters.value.Search.split('=')[1] : filters.value.Search;
+      const search = filters.value.Search;
+
+      // ignore searches if user is manually typing in a filter
+      if (search.includes('=')) {
+        return true;
+      }
+
       return includes(feruchemicalPower.metal, search)
         || feruchemicalPower.names.some((name) => includes(name, search))
         || includes(allomanticPower.metal, search)
